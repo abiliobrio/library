@@ -14,7 +14,7 @@
 
 			<property name="javax.persistence.jdbc.user" value="root" />
 
-			<property name="javax.persistence.jdbc.password" value="123456" />
+			<property name="javax.persistence.jdbc.password" value="ASvij0968#" />
 
 			<property name="javax.persistence.jdbc.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 

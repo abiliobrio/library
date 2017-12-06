@@ -1,11 +1,17 @@
 package br.edu.infnet.library.model;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Book {
@@ -16,26 +22,21 @@ public class Book {
 	private Integer isbn;
 
 	private String bookTitle;
-	private Date DateOfPublication;
 	
-	public Book(String bookTitle, Date dateOfPublic) {
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar DateOfPublication;
+	
+	public Book(String bookTitle, Calendar dateOfPublic) {
 		this.bookTitle = bookTitle;
 		this.DateOfPublication = dateOfPublic;
 	}
 	
-	@OneToOne
-	private Author author;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Author author = new Author();
+	 
+	@ManyToMany
+	private List<Category> category = new ArrayList<>();
 	
-	@OneToOne
-	private Category category;
-	
-	
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 	public Author getAuthor() {
 		return author;
 	}
@@ -54,11 +55,17 @@ public class Book {
 	public void setBookTitle(String bookTitle) {
 		this.bookTitle = bookTitle;
 	}
-	public Date getDateOfPublication() {
+	public Calendar getDateOfPublication() {
 		return DateOfPublication;
 	}
-	public void setDateOfPublication(Date dateOfPublication) {
+	public void setDateOfPublication(Calendar dateOfPublication) {
 		DateOfPublication = dateOfPublication;
+	}
+	public List<Category> getCategory() {
+		return category;
+	}
+	public void setCategory(List<Category> category) {
+		this.category = category;
 	}
 	
 }
